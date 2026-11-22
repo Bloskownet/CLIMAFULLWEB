@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clima Full | Curso + Sorteo</title>
+    <title>Clima Full Jujuy | Curso + Sorteo</title>
     <style>
         * {
             box-sizing: border-box;
@@ -36,34 +36,62 @@
             padding: 3.5rem 1.5rem 5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        /* Foto esfumada (desenfocada) */
-        header::before {
-            content: "";
-            position: absolute;
-            inset: -12px;
-            background: url('fondo-encabezado.jpg') center 45% / cover no-repeat;
-            filter: blur(3px);
-            z-index: 0;
+        /* Slideshow: columnas con fotos que se alternan con fundido */
+        header {
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        /* Velo azul francia a naranja, suave, para que se lean las letras */
+        header > .slides {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            display: grid;
+            grid-template-columns: repeat(var(--cols, 4), 1fr);
+            gap: 3px;
+            background: #07224f;
+        }
+        .slides .col { position: relative; overflow: hidden; background: #0B4EA2; }
+        .slides .col img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.6s ease;
+        }
+        .slides .col img.on { opacity: 1; }
+        .slides .col img.on, .slides .col img.out { animation: kb 8s ease-out forwards; }
+        @keyframes kb { from { transform: scale(1); } to { transform: scale(1.08); } }
+        @media (prefers-reduced-motion: reduce) {
+            .slides .col img.on, .slides .col img.out { animation: none; }
+        }
+        /* Velo azul francia a naranja + oscurecido central para que se lean las letras */
         header::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(11, 78, 162, 0.62), rgba(255, 106, 19, 0.38));
+            background:
+                radial-gradient(ellipse at center, rgba(6, 24, 58, 0.55), rgba(6, 24, 58, 0.12) 75%),
+                linear-gradient(135deg, rgba(11, 78, 162, 0.55), rgba(255, 106, 19, 0.35));
             z-index: 1;
         }
-        header > * { position: relative; z-index: 2; }
+        header > *:not(.slides) { position: relative; z-index: 2; }
 
         .logo-box {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.96);
-            padding: 10px 22px;
-            border-radius: 50px;
+            display: inline-block;
             margin-bottom: 1.2rem;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .solo-lectores { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+        .logo-img {
+            display: block;
+            width: min(420px, 86vw);
+            height: auto;
+            border-radius: 14px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
         }
 
         header h1 {
@@ -229,7 +257,7 @@
         }
         .aviso small { display: block; margin-top: 0.8rem; font-weight: 400; color: #166534; }
 
-        .barra { max-width: 1000px; margin: 1rem auto 0; padding: 0 1.5rem; text-align: right; }
+        .barra { position: absolute; top: 12px; right: 12px; margin: 0; padding: 0; z-index: 5; }
         .btn-mis {
             background: #ffffff;
             color: #0B4EA2;
@@ -292,17 +320,12 @@
 <body>
 
     <header>
+        <div class="slides" id="slides"></div>
         <div class="logo-box">
-            <svg width="210" height="44" viewBox="0 0 210 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="22" cy="22" r="18" fill="#FF6A13"/>
-                <path d="M22 9V35M9 22H35M13 13L31 31M31 13L13 31" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                <circle cx="22" cy="22" r="4" fill="#FF6A13" stroke="white" stroke-width="2"/>
-                <text x="48" y="23" fill="#0B4EA2" font-family="Segoe UI, Arial, sans-serif" font-weight="900" font-size="18" letter-spacing="1">CLIMA FULL</text>
-                <text x="49" y="35" fill="#FF6A13" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="9.5" letter-spacing="1.5">CLIMATIZACIÓN</text>
-            </svg>
+            <img src="logo-climafull.png" alt="Clima Full Jujuy" class="logo-img">
         </div>
 
-        <h1>Clima Full</h1>
+        <h1 class="solo-lectores">Clima Full Jujuy</h1>
         <p class="subtitulo">Capacitación técnica profesional y equipamiento de climatización</p>
     </header>
 
@@ -319,13 +342,13 @@
         <section class="promo-card">
             <div class="promo-texto">
                 <span class="badge">Curso Online + Sorteo</span>
-                <h2> Curso de Instalación de Aires Split - Jujuy</h2>
+                <h2>💙💛 Curso de Instalación de Aires Split - Jujuy</h2>
                 <p class="pregunta">¿Querés aprender a instalar aires como un profesional?</p>
                 <p>Sumate al curso de <strong>Clima Full Jujuy</strong>:</p>
                 <ul class="lista-curso">
                     <li>✅ Cómo instalar un Split paso a paso</li>
                     <li>✅ Herramientas, cañería y práctica</li>
-                    <li>✅ Material en PDF + Videos</li>
+                    <li>✅ Material en PDF + certificado</li>
                     <li>✅ Soporte por WhatsApp</li>
                 </ul>
                 <p>Y como regalo por sumarte, participás del sorteo de un
@@ -599,6 +622,82 @@
             }
             btnCons.disabled = false; btnCons.textContent = "Consultar";
         });
+    </script>
+
+    <script>
+    // Slideshow del encabezado: columnas con fotos que se alternan con fundido cruzado
+    (function () {
+        const FOTOS = ["header-1.jpg","header-2.jpg","header-3.jpg","header-4.jpg",
+                       "header-5.jpg","header-6.jpg","header-7.jpg","header-8.jpg"];
+        const ALT = "Equipo de Clima Full Jujuy instalando aires acondicionados";
+        const cont = document.getElementById("slides");
+        if (!cont) return;
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let timers = [], cols = 0;
+
+        const nCols = () => innerWidth >= 900 ? 4 : innerWidth >= 600 ? 3 : 2;
+
+        function build() {
+            timers.forEach(t => { clearTimeout(t); clearInterval(t); });
+            timers = [];
+            cont.textContent = "";
+            cols = nCols();
+            cont.style.setProperty("--cols", cols);
+
+            // Reparte las 8 fotos entre las columnas
+            const groups = Array.from({ length: cols }, () => []);
+            FOTOS.forEach((f, i) => groups[i % cols].push(f));
+
+            groups.forEach((list, ci) => {
+                const col = document.createElement("div");
+                col.className = "col";
+                const imgs = list.map((src, k) => {
+                    const im = document.createElement("img");
+                    im.alt = k === 0 ? ALT : "";
+                    im.decoding = "async";
+                    if (k === 0) { im.src = src; im.className = "on"; }
+                    else { im.dataset.src = src; }   // se cargan despues, para no frenar la pagina
+                    col.appendChild(im);
+                    return im;
+                });
+                cont.appendChild(col);
+                if (imgs.length < 2 || reduce) return;
+
+                let cur = 0;
+                const start = setTimeout(() => {
+                    const t = setInterval(() => {
+                        if (document.hidden) return;                 // pausa si la pestaña no se ve
+                        const next = (cur + 1) % imgs.length;
+                        const nim = imgs[next];
+                        if (!nim.complete || !nim.naturalWidth) return;   // si aun no cargo, se salta: nunca queda vacio
+                        const old = imgs[cur];
+                        old.classList.remove("on");
+                        old.classList.add("out");
+                        nim.classList.remove("out");
+                        nim.classList.add("on");
+                        setTimeout(() => old.classList.remove("out"), 1800);
+                        cur = next;
+                    }, 6000);
+                    timers.push(t);
+                }, 2500 + ci * 1500);                                // columnas desfasadas
+                timers.push(start);
+            });
+        }
+
+        function precargar() {
+            cont.querySelectorAll("img[data-src]").forEach(im => {
+                im.src = im.dataset.src; delete im.dataset.src;
+            });
+        }
+
+        build();
+        window.addEventListener("load", () => setTimeout(precargar, 600));
+        let rz;
+        window.addEventListener("resize", () => {
+            clearTimeout(rz);
+            rz = setTimeout(() => { if (nCols() !== cols) { build(); precargar(); } }, 250);
+        });
+    })();
     </script>
 </body>
 </html>
