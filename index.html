@@ -257,7 +257,83 @@
         }
         .aviso small { display: block; margin-top: 0.8rem; font-weight: 400; color: #166534; }
 
-        .barra { position: absolute; top: 12px; right: 12px; margin: 0; padding: 0; z-index: 5; }
+        /* --- Menu, secciones nuevas y boton de WhatsApp --- */
+        html { scroll-behavior: smooth; }
+        [hidden] { display: none !important; }
+        #inicio, #trabajos, #contacto, #shop { scroll-margin-top: 4.2rem; }
+
+        .menu { background: #E55300; position: sticky; top: 0; z-index: 30; box-shadow: 0 3px 10px rgba(0,0,0,0.18); }
+        .menu-in { max-width: 1000px; margin: 0 auto; padding: 0.35rem 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.2rem 0.4rem; }
+        .menu a.item {
+            color: #ffffff; text-decoration: none; font-weight: 800; text-transform: uppercase;
+            font-size: 0.92rem; letter-spacing: 0.3px; padding: 0.6rem 0.8rem; border-radius: 8px; white-space: nowrap;
+        }
+        .menu a.item:hover, .menu a.item:focus-visible { background: rgba(255,255,255,0.22); outline: none; }
+        .menu .pronto { font-size: 0.6rem; background: #FFC20E; color: #7a3000; border-radius: 20px; padding: 0.1rem 0.45rem; margin-left: 0.35rem; vertical-align: middle; }
+        .menu .btn-mis { margin-left: auto; padding: 0.45rem 0.95rem; font-size: 0.85rem; }
+        .corto { display: none; }
+
+        .seccion-in { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem 2.8rem; text-align: center; }
+        .seccion-in h2 { color: #0B4EA2; font-size: 1.7rem; margin-bottom: 0.4rem; }
+        .seccion-sub { color: #475569; margin-bottom: 1.4rem; }
+
+        .galeria { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; margin-bottom: 1.4rem; }
+        .galeria .foto { border: 0; padding: 0; background: #0B4EA2; border-radius: 12px; overflow: hidden; cursor: zoom-in; aspect-ratio: 3 / 4; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .galeria .foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+        .galeria .foto:hover img, .galeria .foto:focus-visible img { transform: scale(1.06); }
+
+        .tarjeta { background: #ffffff; border-radius: 16px; padding: 1.8rem 1.4rem; box-shadow: 0 8px 22px rgba(255,106,19,0.12); border-top: 5px solid #FFC20E; }
+        .tarjeta p { color: #475569; font-size: 1.05rem; margin-bottom: 1rem; }
+        .shop-card { border: 2px dashed #FF6A13; border-top: 2px dashed #FF6A13; }
+        .shop-card .gran-emoji { font-size: 2.4rem; display: block; margin-bottom: 0.3rem; }
+
+        .grupo-red { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
+        .cbtn {
+            display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.3rem; border-radius: 10px;
+            color: #ffffff; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.15s ease, filter 0.15s ease;
+        }
+        .cbtn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+        .cbtn svg, .ico svg { width: 1.3em; height: 1.3em; fill: currentColor; flex: none; }
+        .cbtn.wa { background: #1FA855; }
+        .cbtn.fb { background: #1877F2; }
+        .cbtn.ig { background: #D62976; }
+        .cbtn.tk { background: #111827; }
+        .cbtn.azul { background: #0B4EA2; }
+
+        .wa-flot {
+            position: fixed; right: 16px; bottom: 16px; width: 58px; height: 58px; border-radius: 50%;
+            background: #25D366; color: #ffffff; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3); z-index: 40; transition: transform 0.15s ease;
+        }
+        .wa-flot:hover { transform: scale(1.08); }
+        .wa-flot svg { width: 32px; height: 32px; fill: currentColor; }
+
+        .footer-redes { display: flex; gap: 0.6rem; justify-content: center; margin-bottom: 0.8rem; }
+        .footer-redes a { width: 40px; height: 40px; border-radius: 50%; background: #0B4EA2; color: #ffffff; display: flex; align-items: center; justify-content: center; }
+        .footer-redes a:hover { background: #E55300; }
+        .footer-redes svg { width: 20px; height: 20px; fill: currentColor; }
+
+        .lightbox { position: fixed; inset: 0; background: rgba(5, 12, 28, 0.92); z-index: 60; display: none; align-items: center; justify-content: center; padding: 1rem; }
+        .lightbox.abierto { display: flex; }
+        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .lightbox button { position: absolute; border: 0; background: rgba(255,255,255,0.18); color: #ffffff; width: 46px; height: 46px; border-radius: 50%; font-size: 1.6rem; cursor: pointer; line-height: 1; }
+        .lightbox button:hover { background: rgba(255,255,255,0.32); }
+        .lb-cerrar { top: 14px; right: 14px; }
+        .lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+        @media (max-width: 700px) {
+            .menu { position: static; }
+            .menu-in { padding: 0.3rem 0.5rem; justify-content: center; }
+            .menu a.item { font-size: 0.8rem; padding: 0.55rem 0.55rem; }
+            .menu .pronto { display: none; }
+            .menu .btn-mis { margin-left: 0; flex: 1 1 100%; margin-bottom: 0.3rem; }
+            .largo { display: none; }
+            .corto { display: inline; }
+            .galeria { grid-template-columns: repeat(2, 1fr); }
+            .seccion-in h2 { font-size: 1.45rem; }
+            .wa-flot { width: 54px; height: 54px; right: 12px; bottom: 12px; }
+        }
         .btn-mis {
             background: #ffffff;
             color: #0B4EA2;
@@ -323,7 +399,15 @@
 </head>
 <body>
 
-    <header>
+    <!-- Iconos (se reutilizan en toda la pagina) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="ic-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol>
+        <symbol id="ic-fb" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+        <symbol id="ic-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3"/></symbol>
+        <symbol id="ic-tk" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+    </svg>
+
+    <header id="inicio">
         <div class="slides" id="slides"></div>
         <div class="logo-box">
             <img src="logo-climafull.png" alt="Clima Full Jujuy" class="logo-img">
@@ -333,7 +417,15 @@
         <p class="subtitulo">Capacitación · Instalación · Mantenimiento · Reparación y equipamiento de climatización</p>
     </header>
 
-    <div class="barra"><button type="button" class="btn-mis" id="btn-mis">Mis números y mi curso</button></div>
+    <nav class="menu" aria-label="Menú principal">
+        <div class="menu-in">
+            <a class="item" href="#inicio">Inicio</a>
+            <a class="item" href="#trabajos"><span class="largo">Nuestros trabajos</span><span class="corto">Trabajos</span></a>
+            <a class="item" href="#contacto">Contacto</a>
+            <a class="item" href="#shop">Shop<span class="pronto">pronto</span></a>
+            <button type="button" class="btn-mis" id="btn-mis"><span class="largo">Mis números y mi curso</span><span class="corto">Mis números y mi curso</span></button>
+        </div>
+    </nav>
 
     <div id="aviso" class="aviso">
         <div id="aviso-txt">Confirmando tu pago...</div>
@@ -407,7 +499,61 @@
         </div>
     </div>
 
+    <section id="trabajos">
+        <div class="seccion-in">
+            <h2>Nuestros trabajos</h2>
+            <p class="seccion-sub">Instalaciones reales de nuestro equipo en Jujuy.</p>
+            <div class="galeria" id="galeria">
+                <button type="button" class="foto" data-i="1"><img src="header-1.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="2"><img src="header-2.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="3"><img src="header-3.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="4"><img src="header-4.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="5"><img src="header-5.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="6"><img src="header-6.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="7"><img src="header-7.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+                <button type="button" class="foto" data-i="8"><img src="header-8.jpg" alt="Instalación de aire acondicionado por el equipo de Clima Full Jujuy" loading="lazy" width="720" height="960"></button>
+            </div>
+            <div class="grupo-red">
+                <a class="cbtn fb" data-red="facebook" hidden><svg aria-hidden="true"><use href="#ic-fb"/></svg>Ver más trabajos en Facebook</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div class="seccion-in">
+            <h2>Contacto</h2>
+            <div class="tarjeta">
+                <p>¿Tenés una consulta sobre el curso, una instalación o un servicio? Escribinos y te respondemos a la brevedad.</p>
+                <div class="grupo-red">
+                    <a class="cbtn wa" data-red="whatsapp" hidden><svg aria-hidden="true"><use href="#ic-wa"/></svg>WhatsApp</a>
+                    <a class="cbtn fb" data-red="facebook" hidden><svg aria-hidden="true"><use href="#ic-fb"/></svg>Facebook</a>
+                    <a class="cbtn ig" data-red="instagram" hidden><svg aria-hidden="true"><use href="#ic-ig"/></svg>Instagram</a>
+                    <a class="cbtn tk" data-red="tiktok" hidden><svg aria-hidden="true"><use href="#ic-tk"/></svg>TikTok</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop">
+        <div class="seccion-in">
+            <h2>Shop</h2>
+            <div class="tarjeta shop-card">
+                <span class="gran-emoji" aria-hidden="true">🛠️</span>
+                <p><strong>Próximamente.</strong> Estamos preparando nuestra tienda de equipos y accesorios de climatización.</p>
+                <div class="grupo-red">
+                    <a class="cbtn wa" data-red="whatsapp" hidden><svg aria-hidden="true"><use href="#ic-wa"/></svg>Consultar por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
+        <div class="footer-redes">
+            <a data-red="whatsapp" hidden aria-label="WhatsApp"><svg aria-hidden="true"><use href="#ic-wa"/></svg></a>
+            <a data-red="facebook" hidden aria-label="Facebook"><svg aria-hidden="true"><use href="#ic-fb"/></svg></a>
+            <a data-red="instagram" hidden aria-label="Instagram"><svg aria-hidden="true"><use href="#ic-ig"/></svg></a>
+            <a data-red="tiktok" hidden aria-label="TikTok"><svg aria-hidden="true"><use href="#ic-tk"/></svg></a>
+        </div>
         <p>© 2026 Clima Full. Todos los derechos reservados.</p>
         <p>Tus números asignados y el acceso al curso se muestran automáticamente al confirmar el pago.</p>
     </footer>
@@ -700,6 +846,76 @@
         window.addEventListener("resize", () => {
             clearTimeout(rz);
             rz = setTimeout(() => { if (nCols() !== cols) { build(); precargar(); } }, 250);
+        });
+    })();
+    </script>
+
+    <!-- Boton flotante de WhatsApp (aparece solo si cargaste el numero abajo, en CONTACTO) -->
+    <a class="wa-flot" data-red="whatsapp" hidden aria-label="Escribinos por WhatsApp"><svg aria-hidden="true"><use href="#ic-wa"/></svg></a>
+
+    <!-- Visor de fotos -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+        <button type="button" class="lb-cerrar" id="lb-cerrar" aria-label="Cerrar">&times;</button>
+        <button type="button" class="lb-prev" id="lb-prev" aria-label="Anterior">&#8249;</button>
+        <img id="lb-img" alt="">
+        <button type="button" class="lb-next" id="lb-next" aria-label="Siguiente">&#8250;</button>
+    </div>
+
+    <script>
+    // ================================================================
+    //  CONTACTO: tus datos de contacto. Lo que dejes vacío ("") no se muestra.
+    // ================================================================
+    const CONTACTO = {
+        // WhatsApp: codigo de pais + codigo de area (sin 0 ni 15) + numero, todo junto y sin signos.
+        // Ejemplo para Jujuy: "5493884123456"
+        whatsapp: "5493885067312",
+        mensajeWhatsapp: "Hola! Quiero consultar por el curso de instalación de aires split.",
+        // Pegá el link completo de tu pagina. Ejemplo: "https://www.facebook.com/tupagina"
+        facebook: "https://www.facebook.com/climafulljujuy",
+        instagram: "https://www.instagram.com/clima_full",
+        tiktok: "https://www.tiktok.com/@clima_full_jujuy"
+    };
+
+    (function () {
+        // --- Botones de redes y WhatsApp ---
+        const wa = (CONTACTO.whatsapp || "").replace(/\D/g, "");
+        const urls = {
+            whatsapp: wa ? "https://wa.me/" + wa + "?text=" + encodeURIComponent(CONTACTO.mensajeWhatsapp || "") : "",
+            facebook: (CONTACTO.facebook || "").trim(),
+            instagram: (CONTACTO.instagram || "").trim(),
+            tiktok: (CONTACTO.tiktok || "").trim()
+        };
+        document.querySelectorAll("[data-red]").forEach(a => {
+            const u = urls[a.dataset.red];
+            if (u && u.startsWith("http")) {
+                a.href = u; a.target = "_blank"; a.rel = "noopener"; a.hidden = false;
+            }
+        });
+        document.querySelectorAll(".grupo-red, .footer-redes").forEach(g => {
+            g.hidden = !g.querySelector("[data-red]:not([hidden])");
+        });
+
+        // --- Visor de fotos ---
+        const fotos = [...document.querySelectorAll("#galeria .foto img")];
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lb-img");
+        let idx = 0;
+        function abrir(i) {
+            idx = (i + fotos.length) % fotos.length;
+            lbImg.src = fotos[idx].getAttribute("src");
+            lb.classList.add("abierto");
+        }
+        function cerrar() { lb.classList.remove("abierto"); lbImg.removeAttribute("src"); }
+        document.querySelectorAll("#galeria .foto").forEach((b, i) => b.addEventListener("click", () => abrir(i)));
+        document.getElementById("lb-cerrar").addEventListener("click", cerrar);
+        document.getElementById("lb-prev").addEventListener("click", e => { e.stopPropagation(); abrir(idx - 1); });
+        document.getElementById("lb-next").addEventListener("click", e => { e.stopPropagation(); abrir(idx + 1); });
+        lb.addEventListener("click", e => { if (e.target === lb) cerrar(); });
+        document.addEventListener("keydown", e => {
+            if (!lb.classList.contains("abierto")) return;
+            if (e.key === "Escape") cerrar();
+            if (e.key === "ArrowLeft") abrir(idx - 1);
+            if (e.key === "ArrowRight") abrir(idx + 1);
         });
     })();
     </script>
